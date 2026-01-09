@@ -34,7 +34,7 @@ module.exports.isOwner  = async(req,res,next)=>{
 
 module.exports.validateList = (req,res,next) =>{
   let {error} = listingSchema.validate(req.body);
-  // console.log(error); -> has lot of objects , we can print in detial as well
+
   if(error){
     let errMsg = error.details.map((el)=> el.message).join(" , ");
     console.log(errMsg);
@@ -47,7 +47,7 @@ module.exports.validateList = (req,res,next) =>{
 
 module.exports.validateReview = (req,res,next) =>{
   let {error} = reviewSchema.validate(req.body);
-  // console.log(error); -> has lot of objects , we can print in detial as well
+
   if(error){
     let errMsg = error.details.map((el)=> el.message).join(" , ");
     console.log(errMsg);

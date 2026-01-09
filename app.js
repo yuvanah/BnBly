@@ -42,15 +42,13 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 
  
+
 const dbUrl = process.env.ATLASDB_URL;
-
-
 main().catch(err => console.log(err));
 async function main() {
   await mongoose.connect(dbUrl);
 
 }
-
 
 
 
@@ -63,7 +61,7 @@ const store = MongoStore.create({
    touchAfter: 24 * 3600,
 
 });
-
+ 
 store.on("error",()=>{
   console.log("Error in Mongo session store",err);
 });
@@ -116,9 +114,7 @@ app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
 
-// app.get("/",(req,res)=>{
-//   res.send("hi. i am root");
-// })
+
 
 app.all(/.*/, (req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
@@ -129,7 +125,7 @@ app.all(/.*/, (req, res, next) => {
 app.use((err,req,res,next)=>{
   console.log(err);
  let{statusCode = 500,message="Something went wrong"} = err;
-//  res.status(statusCode).send(message);
+
 res.status(statusCode).render("error.ejs",{err});
 })
 
